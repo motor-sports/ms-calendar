@@ -76,10 +76,10 @@ body {
 }
 
 .title {
-    font-size: 24px;
+    font-size: 6vh;
     line-height: 1;
     color: white;
     position: fixed;
-    top: calc(4%-12px);
-    left: calc(4%-12px);
+    top: calc(4%-3vh);
+    left: calc(4%-3vh);
 }
