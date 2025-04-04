@@ -1,10 +1,4 @@
 import { refresh , wrc_events , erc_events , wrx_events, total_sort , total_calendar } from './js/methods.js'
+import { clear_tiles, new_tile } from './js/elements.js'
 
 await refresh()
-
-await total_sort()
-
-console.log(total_calendar[0])
-
-let tile = document.createElement("div")
-document.getElementById("content-wrapper").appendChild(tile)

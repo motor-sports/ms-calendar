@@ -1,13 +1,12 @@
 import { refresh_button } from './elements.js'
+import { ms_event } from './classes.js'
+import { clear_tiles , add_tiles } from './elements.js'
 
 let wrc_events = []
-let wrc_dates = []
 
 let erc_events = []
-let erc_dates = []
 
 let wrx_events = []
-let wrx_dates = []
 
 let total_calendar = []
 
@@ -20,7 +19,8 @@ export async function get_wrc_events() {
     .then(response => response.json())
     .then(data => {
         for (var event in data.content) {
-            events.push(data.content[event])
+            event = data.content[event]
+            events.push(new ms_event(event.title, new Date(event.startDate), new Date(event.endDate), event.championshipLogo[0].url))
         }
     })
 
@@ -34,7 +34,8 @@ export async function get_erc_events() {
     .then(response => response.json())
     .then(data => {
         for (var event in data.content) {
-            events.push(data.content[event])
+            event = data.content[event]
+            events.push(new ms_event(event.title, new Date(event.startDate), new Date(event.endDate), event.championshipLogo[0].url))
         }
     })
 
@@ -48,7 +49,8 @@ export async function get_wrx_events() {
     .then(response => response.json())
     .then(data => {
         for (var event in data.content) {
-            events.push(data.content[event])
+            event = data.content[event]
+            events.push(new ms_event(event.title, new Date(event.startDate), new Date(event.endDate), event.championshipLogo[0].url))
         }
     })
 
@@ -56,24 +58,33 @@ export async function get_wrx_events() {
 }
 
 export async function refresh() {
+    total_calendar = []
+    wrc_events = []
+    erc_events = []
+    wrx_events = []
+
+    clear_tiles()
     wrc_events = await get_wrc_events()
     erc_events = await get_erc_events()
     wrx_events = await get_wrx_events()
+
+    total_sort()
+
     console.log("Events refreshed")
     
     refresh_button.classList = "rubik-text available"
 }
 
 function wrc_date_sort() {
-    wrc_events = wrc_events.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+    wrc_events = wrc_events.sort((a, b) => a.startDate - b.startDate);
 }
 
 function erc_date_sort() {
-    erc_events = erc_events.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+    erc_events = erc_events.sort((a, b) => a.startDate - b.startDate);
 }
 
 function wrx_date_sort() {
-    wrx_events = wrx_events.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+    wrx_events = wrx_events.sort((a, b) => a.startDate - b.startDate);
 }
 
 function get_future_wrc_events() {
@@ -81,7 +92,7 @@ function get_future_wrc_events() {
     let future = []
 
     for (const event in wrc_events) {
-        if (date < new Date(wrc_events[event].endDate)) {
+        if (date < wrc_events[event].endDate) {
             future.push(wrc_events[event])
         }
     }
@@ -94,7 +105,7 @@ function get_future_erc_events() {
     let future = []
 
     for (const event in erc_events) {
-        if (date < new Date(erc_events[event].endDate)) {
+        if (date < erc_events[event].endDate) {
             future.push(erc_events[event])
         }
     }
@@ -107,7 +118,7 @@ function get_future_wrx_events() {
     let future = []
 
     for (const event in wrx_events) {
-        if (date < new Date(wrx_events[event].endDate)) {
+        if (date < wrx_events[event].endDate) {
             future.push(wrx_events[event])
         }
     }
@@ -121,5 +132,6 @@ export async function total_sort() {
     wrx_date_sort()
     total_calendar = total_calendar.concat(get_future_wrc_events(), get_future_erc_events(), get_future_wrx_events())
 
-    total_calendar = await total_calendar.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+    total_calendar = await total_calendar.sort((a, b) => a.startDate - b.startDate);
+    add_tiles()
 }

@@ -30,6 +30,7 @@ body {
 
 /* Classes */
 .navbar {
+    z-index: 10;
     display: block;
     color: #c93f3f;
     background-color: #c93f3f;
@@ -43,6 +44,7 @@ body {
 }
 
 .title {
+    z-index: 10;
     font-size: 5vh;
     line-height: 1;
     color: white;
@@ -53,6 +55,7 @@ body {
 }
 
 #refresh {
+    z-index: 10;
     font-size: 3vh;
     line-height: 1;
     height: 8vh;
@@ -92,12 +95,32 @@ body {
 }
 
 #content-wrapper > div {
-    background-color: white;
+    background-color: #4c4c4c;
     display: block;
-    height: 30vh;
+    height: 20vw;
     width: 60vw;
     margin-left: 2vh;
     margin-top: 2vh;
     margin-bottom: 2vh;
-    border-radius: 20px;
+    border-radius: 15px;
+}
+
+#content-wrapper > div > img {
+    z-index: 1;
+    position: relative;
+    top: 0;
+    width: 80px;
+    height: 80px;
+    float: left;
+}
+
+.tile_title {
+    z-index: 1;
+    position: relative;
+    top: 1vh;
+    text-align: center;
+    font-size: 25px;
+    width: calc(60vw - 80px);
+    color: white;
+    float: right;
 }
