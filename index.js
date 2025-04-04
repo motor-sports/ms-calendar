@@ -1,9 +1,7 @@
-console.log("running")
+import { refresh , wrc_events , erc_events , wrx_events, total_sort , total_calendar } from './js/methods.js'
 
-fetch('https://api.wrc.com/content/filters/calendar?championship=wrc&origin=vcms&year=2025', { method: "GET", mode: 'cors', headers: { 'Content-Type': 'application/json',}})
-.then(response => response.json())
-.then(data => {
-    data.forEach((data) => {
-        console.log(data)
-    })
-})
+await refresh()
+
+await total_sort()
+
+console.log(total_calendar[0])

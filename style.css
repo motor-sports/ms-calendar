@@ -52,6 +52,30 @@ body {
     left: calc((4vw - 2.5vw) / 2);
 }
 
+#refresh {
+    font-size: 3vh;
+    line-height: 1;
+    height: 8vh;
+    position: fixed;
+    border: none;
+    display: inline-block;
+    margin: 0;
+    padding-right: 3vh;
+    padding-left: 3vh;
+    top: 0;
+    right: 0;
+}
+
+.available {
+    background-color: #c93f3f;
+    color: white;
+}
+
+.unavailable {
+    background-color: #4a1717;;
+    color: gray;
+}
+
 .spacer {
     display: block;
     color: #c93f3f;
