@@ -85,3 +85,19 @@ body {
     height: 8vh;
     margin: 0;
 }
+
+#content-wrapper {
+    width: 100vw;
+    color: #282828;
+}
+
+#content-wrapper > div {
+    background-color: white;
+    display: block;
+    height: 30vh;
+    width: 60vw;
+    margin-left: 2vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    border-radius: 20px;
+}
